@@ -8,6 +8,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"reflect"
 )
 
 var (
@@ -83,7 +84,8 @@ func handleIncomingMessage(w http.ResponseWriter, r *http.Request) {
 	entry := reqBody["entry"].([]interface{})[0].(map[string]interface{})
 	changes := entry["changes"].([]interface{})[0].(map[string]interface{})
 	value := changes["value"].(map[string]interface{})
-	messages := value["messages"].([]interface{})
+	log.Printf("Type of messages: %v\n", reflect.TypeOf(value["messages"]))
+	/*messages := value["messages"].([]interface{})
 	if len(messages) > 0 {
 		message := messages[0].(map[string]interface{})
 		if message["type"] == "text" {
@@ -91,7 +93,7 @@ func handleIncomingMessage(w http.ResponseWriter, r *http.Request) {
 			sendReply(businessPhoneNumberID, message)
 			markMessageAsRead(businessPhoneNumberID, message["id"].(string))
 		}
-	}
+	}*/
 
 	w.WriteHeader(http.StatusOK)
 }
