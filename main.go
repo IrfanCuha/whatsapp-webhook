@@ -22,11 +22,11 @@ func main() {
 	log.Printf("Server is listening on port: %s", port)
 
 	// Specify the paths to your certificate and key files
-	certFile := "cert.pem"
-	keyFile := "key.pem"
+	//certFile := "cert.pem"
+	//keyFile := "key.pem"
 
 	// Use ListenAndServeTLS to start the server with HTTPS
-	if err := http.ListenAndServeTLS(":"+port, certFile, keyFile, nil); err != nil {
+	if err := http.ListenAndServe(":"+port, nil); err != nil {
 		log.Fatalf("Server failed to start: %v", err)
 	}
 }
